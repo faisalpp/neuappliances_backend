@@ -6,7 +6,7 @@ const {PORT} = require('./config/index')
 const errorHandler = require('./middleware/errorHandler')
 const dbconnect = require('./databse/index')
 const cookieParser = require('cookie-parser')
-
+const path = require('path')
 const corsOptions = {
   credentials: true,
   origin: ["http://localhost:3000","https://neuappliances.vercel.app"],
@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 
 app.use(router);
 dbconnect();
-app.use("/storage", express.static("storage"));
+app.use('/storage', express.static(path.join(__dirname + '/storage')));
 app.use(errorHandler);
 
 app.listen(PORT,()=>{
