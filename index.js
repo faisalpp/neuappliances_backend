@@ -6,7 +6,6 @@ const {PORT} = require('./config/index')
 const errorHandler = require('./middleware/errorHandler')
 const dbconnect = require('./databse/index')
 const cookieParser = require('cookie-parser')
-const path = require('path')
 
 const corsOptions = {
   credentials: true,
@@ -28,10 +27,6 @@ app.use(cors(corsOptions));
 app.get('/', (req, res) => {
   res.send('Hey this is my API running 🥳')
 })
-app.get('/storage/categories/:name', (req, res) => {
-  const url = 'storage/categories/' + req.params.name;
-  res.sendFile(url,{root:__dirname});  
-})
 
 
 
@@ -47,7 +42,7 @@ app.get('/storage/categories/:name', (req, res) => {
 
 app.use(router);
 dbconnect();
-// app.use("/storage", express.static("storage"));
+app.use("/storage", express.static("storage"));
 app.use(errorHandler);
 
 app.listen(PORT,()=>{
