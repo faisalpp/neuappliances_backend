@@ -23,8 +23,7 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(express.json())
 
 app.use(cors({
-  origin: 'https://neuappliances.vercel.app',
-  credentials: true
+  origin: ['http://localhost:3000','https://neuappliances.vercel.app'],
 }));
 
 app.get('/', (req, res) => {
