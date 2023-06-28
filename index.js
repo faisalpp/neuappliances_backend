@@ -49,4 +49,3 @@ app.listen(PORT,()=>{
     console.log(`Server Started on port: ${PORT}`)
 });
 
-module.exports = app;
