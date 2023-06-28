@@ -24,6 +24,9 @@ app.use(express.json())
 
 app.use(cors(corsOptions));
 
+app.get('/', (req, res) => {
+  res.send('Hey this is my API running 🥳')
+})
 
 
 
