@@ -122,8 +122,8 @@ const authController = {
 
     
 
-    res.cookie('accessToken',accessToken,{httpOnly:true,maxAge: 24 * 60 * 60 * 1000});
-    res.cookie('refreshToken',refreshToken,{httpOnly:true,maxAge: 24 * 60 * 60 * 1000});
+    res.cookie('accessToken',accessToken,{httpOnly:false,maxAge: 24 * 60 * 60 * 1000});
+    res.cookie('refreshToken',refreshToken,{httpOnly:false,maxAge: 24 * 60 * 60 * 1000});
 
     const userDto = new UserDTO(user);
 
@@ -193,15 +193,30 @@ const authController = {
 
       await RefreshToken.updateOne({ _id: id }, { token: refreshToken });
 
+      // res.cookie("accessToken", accessToken, {
+      //   maxAge: 1000 * 60 * 60 * 24,
+      //   httpOnly: true,
+      // });
+
+      // res.cookie("refreshToken", refreshToken, {
+      //   maxAge: 1000 * 60 * 60 * 24,
+      //   httpOnly: true,
+      // });
+
       res.cookie("accessToken", accessToken, {
         maxAge: 1000 * 60 * 60 * 24,
-        httpOnly: true,
+        httpOnly: false,
+        sameSite: 'none',
+        secure: true 
       });
 
       res.cookie("refreshToken", refreshToken, {
         maxAge: 1000 * 60 * 60 * 24,
-        httpOnly: true,
+        httpOnly: false,
+        sameSite: 'none',
+        secure: true 
       });
+
     } catch (e) {
       return next(e);
     }
