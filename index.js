@@ -9,6 +9,11 @@ const cookieParser = require('cookie-parser')
 const path = require('path')
 const app = express();
 
+const corsOptions = {
+  credentials: true,
+  origin: ["http://localhost:3000","https://neuappliances.vercel.app"],
+};
+
 app.use(cookieParser())
 // Increase payload size limit for JSON requests
 app.use(express.json({ limit: '10mb' }));
@@ -17,7 +22,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(express.json());
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 // app.use(
 //   cors({
