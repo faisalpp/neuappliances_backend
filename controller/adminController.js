@@ -114,8 +114,8 @@ const adminController = {
       return next(error);
     }
 
-    res.cookie('accessToken',accessToken,{httpOnly:true,maxAge: 24 * 60 * 60 * 1000});
-    res.cookie('refreshToken',refreshToken,{httpOnly:true,maxAge: 24 * 60 * 60 * 1000});
+    res.cookie('accessToken',accessToken,{httpOnly:false,maxAge: 24 * 60 * 60 * 1000});
+    res.cookie('refreshToken',refreshToken,{httpOnly:false,maxAge: 24 * 60 * 60 * 1000});
 
     const adminDto = new AdminDTO(admin);
 
