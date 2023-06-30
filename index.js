@@ -7,11 +7,6 @@ const errorHandler = require('./middleware/errorHandler')
 const dbconnect = require('./databse/index')
 const cookieParser = require('cookie-parser')
 const path = require('path')
-const corsOptions = {
-  credentials: true,
-  origin: ["http://localhost:3000","https://neuappliances.vercel.app"],
-};
-
 const app = express();
 
 app.use(cookieParser())
@@ -20,18 +15,9 @@ app.use(express.json({ limit: '10mb' }));
 
 // Increase payload size limit for URL-encoded requests
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
-app.use(express.json())
+app.use(express.json());
 
-app.use(cors({
-  origin: ['http://localhost:3000','https://neuappliances.vercel.app'],
-  credentials: true
-}));
-
-app.get('/', (req, res) => {
-  res.send('Hey this is my API running 🥳')
-})
-
-
+app.use(cors());
 
 // app.use(
 //   cors({
@@ -43,9 +29,12 @@ app.get('/', (req, res) => {
 //   })
 // );
 
-app.use(router);
 dbconnect();
+
+app.use(router);
+
 app.use('/storage', express.static(path.join(__dirname + '/storage')));
+
 app.use(errorHandler);
 
 app.listen(PORT,()=>{

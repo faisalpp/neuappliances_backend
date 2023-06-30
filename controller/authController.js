@@ -20,7 +20,7 @@ const authController = {
       confirmPassword: Joi.ref("password"),
     });
     const { error } = userRegisterSchema.validate(req.body);
-
+    
     // 2. if error in validation -> return error via middleware
     if (error) {
       return next(error)
@@ -72,7 +72,7 @@ const authController = {
     });
 
     const { error } = userLoginSchema.validate(req.body);
-    
+    console.log(req.body)
     // 2. if error in validation -> return error via middleware
     if (error) {
       return next(error)
