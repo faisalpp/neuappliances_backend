@@ -11,7 +11,7 @@ const authController = {
   async register(req, res, next) {
     // 1. validate user input
     const userRegisterSchema = Joi.object({
-      firstName: Joi.string().min(5).max(30).required(),
+      firstName: Joi.string().min(8).max(30).required(),
       lastName: Joi.string().max(30).required(),
       email: Joi.string().email().required(),
       phone: Joi.string().required(),
@@ -193,29 +193,16 @@ const authController = {
 
       await RefreshToken.updateOne({ _id: id }, { token: refreshToken });
 
-      // res.cookie("accessToken", accessToken, {
-      //   maxAge: 1000 * 60 * 60 * 24,
-      //   httpOnly: true,
-      // });
-
-      // res.cookie("refreshToken", refreshToken, {
-      //   maxAge: 1000 * 60 * 60 * 24,
-      //   httpOnly: true,
-      // });
-
       res.cookie("accessToken", accessToken, {
         maxAge: 1000 * 60 * 60 * 24,
-        httpOnly: false,
-        sameSite: 'none',
-        secure: true 
+        httpOnly: true,
       });
 
       res.cookie("refreshToken", refreshToken, {
         maxAge: 1000 * 60 * 60 * 24,
-        httpOnly: false,
-        sameSite: 'none',
-        secure: true 
+        httpOnly: true,
       });
+
 
     } catch (e) {
       return next(e);

@@ -14,6 +14,7 @@ const corsOptions = {
   origin: ["http://localhost:3000","https://neuappliances.vercel.app"],
 };
 
+
 app.use(cookieParser())
 // Increase payload size limit for JSON requests
 app.use(express.json({ limit: '10mb' }));
@@ -21,8 +22,9 @@ app.use(express.json({ limit: '10mb' }));
 // Increase payload size limit for URL-encoded requests
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(express.json());
-
 app.use(cors(corsOptions));
+
+
 
 // app.use(
 //   cors({

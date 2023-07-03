@@ -4,13 +4,16 @@ const auth = require('../middleware/auth');
 const adminAuth = require('../middleware/adminAuth');
 const userProfileController = require('../controller/userProfileController');
 const adminController = require('../controller/adminController');
+const productController = require('../controller/productController');
 const categoryController = require('../controller/categoryController');
 const applianceController = require('../controller/applianceController');
 const categorySection = require('../controller/sectionController');
+const uploader = require('express-fileupload');
 
+const app = express();
 const router = express.Router();
 
-
+router.use(uploader())
 router.get('/api/admin/logout', adminAuth ,authController.logout);
 router.get('/api/logout', auth ,authController.logout);
 
@@ -41,6 +44,14 @@ router.post('/api/admin/create-section-item',adminAuth,categorySection.CreateSec
 router.post('/api/admin/update-section-item',adminAuth,categorySection.UpdateSectionItem);
 router.post('/api/admin/section-item-by-id',adminAuth,categorySection.GetSectionItemById);
 router.post('/api/admin/section-items',adminAuth,categorySection.GetSectionItems);
+// Product Related Routes
+router.post('/api/admin/create-product',adminAuth,productController.CreateProduct);
+router.get('/api/admin/get-products',adminAuth,productController.GetProducts);
+router.post('/api/admin/get-product-types',adminAuth,productController.GetProductTypes);
+router.post('/api/admin/get-product-features',adminAuth,productController.GetProductFeatures);
+router.post('/api/admin/get-category-brands',adminAuth,productController.GetCategoryBrands);
+router.post('/api/admin/get-category-colors',adminAuth,productController.GetCategoryColors);
+
  
  router.get('/api/get-appliances',applianceController.GetAppliances);
  router.post('/api/appliance-sections',applianceController.GetApplianceSections);
