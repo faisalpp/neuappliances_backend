@@ -1,4 +1,5 @@
 const Category = require("../models/category");
+const Product = require("../models/product");
 const categorySection = require("../models/categorySection");
 const sectionItem = require("../models/sectionItem");
 
@@ -27,6 +28,40 @@ const applianceController = {
         return res.status(500).json({status:500,msg:"Internal Server Error!"});
       });
 
+    },
+    async GetApplianceBySectionType(req,res,next){
+      const {category,type,value} = req.body;
+      const query = {category}
+      try{
+
+        switch(type){
+          case 'cosmatic-rating':
+           query.rating = value;
+           break;
+          case 'types':
+            query.type = value;
+            break
+          case 'features':
+            query.feature = value;
+            break;
+          case 'brands':
+            query.brand = value;
+            break
+          case 'colors':
+            query.color = value;
+            break
+          case 'fuel-type':
+            query.fuelType = value;
+            break
+        }
+
+        
+        const products = await Product.find(query);
+        return res.status(200).json({status:200,products:products});
+        
+      }catch(error){
+        return next(error)
+      }      
     }
 
 }

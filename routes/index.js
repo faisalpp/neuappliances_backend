@@ -52,7 +52,7 @@ router.post('/api/admin/get-product-features',adminAuth,productController.GetPro
 router.post('/api/admin/get-category-brands',adminAuth,productController.GetCategoryBrands);
 router.post('/api/admin/get-category-colors',adminAuth,productController.GetCategoryColors);
 
- 
+ router.post('/api/get-product-by-filter',applianceController.GetApplianceBySectionType);
  router.get('/api/get-appliances',applianceController.GetAppliances);
  router.post('/api/appliance-sections',applianceController.GetApplianceSections);
 
