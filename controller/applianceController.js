@@ -29,6 +29,15 @@ const applianceController = {
       });
 
     },
+    async GetApplianceBySlug(req,res,next){
+      const {slug} = req.body;
+      try{
+        const product = await Product.findOne({slug:slug});
+        return res.status(200).json({status:200,product:product});
+      }catch(error){
+        return next(error)
+      }      
+    },
     async GetApplianceBySectionType(req,res,next){
       const {category,type,value} = req.body;
       const query = {category}

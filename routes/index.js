@@ -53,6 +53,7 @@ router.post('/api/admin/get-category-brands',adminAuth,productController.GetCate
 router.post('/api/admin/get-category-colors',adminAuth,productController.GetCategoryColors);
 
  router.post('/api/get-product-by-filter',applianceController.GetApplianceBySectionType);
+ router.post('/api/get-product-by-slug',applianceController.GetApplianceBySlug);
  router.get('/api/get-appliances',applianceController.GetAppliances);
  router.post('/api/appliance-sections',applianceController.GetApplianceSections);
 
