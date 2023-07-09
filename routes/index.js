@@ -8,6 +8,7 @@ const productController = require('../controller/productController');
 const categoryController = require('../controller/categoryController');
 const applianceController = require('../controller/applianceController');
 const categorySection = require('../controller/sectionController');
+const faqController = require('../controller/faqController');
 const uploader = require('express-fileupload');
 
 const app = express();
@@ -51,6 +52,16 @@ router.post('/api/admin/get-product-types',adminAuth,productController.GetProduc
 router.post('/api/admin/get-product-features',adminAuth,productController.GetProductFeatures);
 router.post('/api/admin/get-category-brands',adminAuth,productController.GetCategoryBrands);
 router.post('/api/admin/get-category-colors',adminAuth,productController.GetCategoryColors);
+// Faq Related Route
+router.post('/api/admin/create-faq-tab',adminAuth,faqController.createFaqTab);
+router.get('/api/admin/get-faq-tab',faqController.getFaqTab);
+router.post('/api/admin/update-faq-tab',adminAuth,faqController.updateFaqTab);
+
+router.post('/api/admin/create-faq',adminAuth,faqController.createFaq);
+router.post('/api/admin/get-faqs',faqController.getFaqs);
+router.post('/api/admin/update-faq',faqController.updateFaq);
+
+
 
  router.post('/api/get-product-by-filter',applianceController.GetApplianceBySectionType);
  router.post('/api/get-product-by-slug',applianceController.GetApplianceBySlug);
